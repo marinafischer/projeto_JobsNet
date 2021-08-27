@@ -1,47 +1,43 @@
 import {useState, useEffect} from 'react';
 import axios from "axios"
-//import './App.css'
 
 
 function App() {
-
   const fetchAddress = async() => {
     const address = await axios.get(`https://viacep.com.br/ws/${form.CEP}/json/`);
     setForm({...form, endereco: address.data.logradouro, cidade: address.data.localidade, bairro: address.data.bairro,  estado: address.data.uf });
   };
 
-
   const criaCandidato = async(candidate) => {
-    const user = await axios.post( 'http://localhost:3300/register',form); 
-    console.log(user)
-    if (user.status === 200) {
-      alert('deu certo')
-      setForm({...form, nome:'',
-      cargo:'',
-      dataNascimento:'',
-      sexo: '',
-      estadoCivil: '',
-      CEP: '',
-      endereco: '',
-      numero: '',
-      cidade: '',
-      bairro: '',
-      estado: '',
-      fone1: '',
-      fone2: '',
-      celular: '',
-      contato: '',
-      email: '',
-      identidade: '',
-      cpf: '',
-      veiculo: '',
-      habilitacao: ''})
-    } else {
-    alert('deu errado')
-    }
+    try {
+        const user = await axios.post( 'http://localhost:3300/register',form); 
+        if (user.status === 200) {
+        alert('Formulário Enviado Com Sucesso')
+        setForm({...form, nome:'',
+        cargo:'',
+        dataNascimento:'',
+        sexo: '',
+        estadoCivil: '',
+        CEP: '',
+        endereco: '',
+        numero: '',
+        cidade: '',
+        bairro: '',
+        estado: '',
+        fone1: '',
+        fone2: '',
+        celular: '',
+        contato: '',
+        email: '',
+        identidade: '',
+        cpf: '',
+        veiculo: '',
+        habilitacao: ''})
+        } 
+    } catch (error) {
+        alert("Verifique se todos os dados com asterisco (*) estão preenchidos. Certifique-se que seu CPF, RG e e-mail ainda não tenham sido cadastrados")
+    }    
   };
-
-
 
   const [form, setForm] = useState({
     nome:'',
@@ -82,7 +78,7 @@ function App() {
                             <p class="card-text">
                                 <strong>Somos especialistas em recrutamento e seleção de profissionais nas mais diversas áreas</strong>
                             </p>
-                            <p class="card-text"><small class="text-muted">Para se cadastrar é rápido e fácil!<br></br>Preencha o formulário abaixo com suas informações e clique em Enviar!</small></p>
+                            <p class="card-text"><small class="text-muted">Para se cadastrar é rápido e fácil!<br></br>Preencha o formulário abaixo com suas informações e clique em Enviar! <br></br> Os campos com asterisco (*) são de preenchimento orbrigatório. <br></br> Não serão aceitos formulários que já tenham cadastrado: e-mail, CPF e RG </small></p>
                         </div>
                     </div>
                 </div>
@@ -192,6 +188,9 @@ function App() {
                 <div class="col-md-3 mb-3">
                     <label>CPF*</label>
                     <input class="form-control" onChange={(e)=>{setForm({...form, cpf: e.target.value});}} required value={form.cpf} ></input>
+                    <div id="cpfError" class="invalid-feedback">
+                    CPF já cadastrado
+                    </div>
                 </div>
                 <div class="col-md-3 mb-3" >
                     <label>Identidade*</label>
