@@ -12,14 +12,36 @@ function App() {
 
 
   const criaCandidato = async(candidate) => {
-      console.log('aqui')
     const user = await axios.post( 'http://localhost:3300/register',form); 
+    console.log(user)
     if (user.status === 200) {
       alert('deu certo')
+      setForm({...form, nome:'',
+      cargo:'',
+      dataNascimento:'',
+      sexo: '',
+      estadoCivil: '',
+      CEP: '',
+      endereco: '',
+      numero: '',
+      cidade: '',
+      bairro: '',
+      estado: '',
+      fone1: '',
+      fone2: '',
+      celular: '',
+      contato: '',
+      email: '',
+      identidade: '',
+      cpf: '',
+      veiculo: '',
+      habilitacao: ''})
     } else {
     alert('deu errado')
     }
   };
+
+
 
   const [form, setForm] = useState({
     nome:'',
@@ -44,9 +66,7 @@ function App() {
     habilitacao: ''
   });
 
-  useEffect(()=>{
-    console.log(form);
-  }, [form]);
+  useEffect(()=>{}, [form]);
 
   return (
     <div class='container-sm'>
@@ -174,7 +194,7 @@ function App() {
                     <input class="form-control" onChange={(e)=>{setForm({...form, cpf: e.target.value});}} required value={form.cpf} ></input>
                 </div>
                 <div class="col-md-3 mb-3" >
-                    <label>Identidade</label>
+                    <label>Identidade*</label>
                     <input class="form-control" onChange={(e)=>{setForm({...form, identidade: e.target.value});}} value={form.identidade} ></input>
                 </div>
                 <div class="col-md-3 mb-3">
