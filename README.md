@@ -1,7 +1,7 @@
-#Projeto JobsNet
+# Projeto JobsNet
 
 ## Projeto de site - formulário de cadastro - (front e back) JobsNet. 
-## Realizado para conclusão do curso full-stack da Startech - Gama Academy. 
+### Realizado para conclusão do curso full-stack da Startech - Gama Academy. 
 
 Para o front-end usado React 
   - para iniciar, abrir a pasta front, no terminal usar: npm start
